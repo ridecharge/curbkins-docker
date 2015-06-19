@@ -7,14 +7,21 @@
             <projectUrl>https://github.com/ridecharge/curbkins/</projectUrl>
         </com.coravy.hudson.plugins.github.GithubProjectProperty>
     </properties>
-    <canRoam>true</canRoam>
+    <canRoam>false</canRoam>
     <disabled>false</disabled>
     <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-    <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+    <blockBuildWhenUpstreamBuilding>true</blockBuildWhenUpstreamBuilding>
     <triggers class='vector'>
-        <com.cloudbees.jenkins.GitHubPushTrigger>
+        <jenkins.triggers.ReverseBuildTrigger>
             <spec></spec>
-        </com.cloudbees.jenkins.GitHubPushTrigger>
+            <upstreamProjects>curbkins</upstreamProjects>
+            <threshold>
+                <name>SUCCESS</name>
+                <ordinal>0</ordinal>
+                <color>BLUE</color>
+                <completeBuild>true</completeBuild>
+            </threshold>
+        </jenkins.triggers.ReverseBuildTrigger>
     </triggers>
     <concurrentBuild>false</concurrentBuild>
     <builders>
@@ -42,6 +49,7 @@
     </builders>
     <publishers></publishers>
     <buildWrappers></buildWrappers>
+    <assignedNode>master</assignedNode>
     <scm class='hudson.plugins.git.GitSCM'>
         <userRemoteConfigs>
             <hudson.plugins.git.UserRemoteConfig>
